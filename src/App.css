@@ -2,6 +2,11 @@
   text-align: center;
   font-family: Arial, sans-serif;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .weather-container {
@@ -14,11 +19,12 @@
 
 .weather-card {
   border: 1px solid #ccc;
+
   border-radius: 8px;
   padding: 20px;
   width: 100%;
   max-width: 300px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 8px red;
   transition: transform 0.2s;
 }
 
@@ -38,29 +44,30 @@
 form {
   margin-top: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
+  width: 100%;
+  max-width: 300px;
 }
 
-input {
+input, button {
   padding: 10px;
   font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box; /* Sicherstellen, dass die Box-Größe korrekt berechnet wird */
 }
 
 button {
-  padding: 10px 20px;
-  font-size: 1em;
-  border: none;
-  border-radius: 4px;
   background-color: #007bff;
   color: white;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin: 10px;
-  width: 150px; /* Gleiche Breite für beide Buttons */
+  border: none;
 }
 
 button:hover {
@@ -73,12 +80,8 @@ button:hover {
     width: 80%;
   }
 
-  input {
-    width: calc(100% - 170px); /* Anpassung für gleiche Breite der Buttons */
-  }
-
-  button {
-    width: 150px; /* Gleiche Breite für beide Buttons */
+  form {
+    width: 90%;
   }
 }
 
@@ -87,11 +90,7 @@ button:hover {
     width: 100%;
   }
 
-  input {
-    width: calc(100% - 150px); /* Anpassung für gleiche Breite der Buttons */
-  }
-
-  button {
-    width: 150px; /* Gleiche Breite für beide Buttons */
+  form {
+    width: 90%;
   }
 }

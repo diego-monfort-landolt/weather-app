@@ -6,6 +6,7 @@ const App: React.FC = () => {
   const [weatherData, setWeatherData] = useState<any[]>([]);
   const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [city, setCity] = useState<string>('');
+  const [searchedCity, setSearchedCity] = useState<string>(''); // Neuer Zustand für die gesuchte Stadt
 
   useEffect(() => {
     if (location) {
@@ -26,6 +27,7 @@ const App: React.FC = () => {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
+        setSearchedCity(''); // Gesuchte Stadt zurücksetzen
       });
     } else {
       alert('Geolocation is not supported by this browser.');
@@ -41,21 +43,22 @@ const App: React.FC = () => {
     const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true`);
     const data = await response.json();
     setWeatherData([data]);
+    setSearchedCity(city); // Gesuchte Stadt speichern
   };
 
   return (
     <div className="App">
-      <h1>Wettervorhersage</h1>
-      <button onClick={handleLocation}>Standort erfassen</button>
+      <h1>Previsión meteorológica</h1>
+      <button onClick={handleLocation}>Ubicación</button>
       <form onSubmit={handleCitySubmit}>
-        <input type="text" value={city} onChange={handleCityChange} placeholder="Stadt eingeben" />
-        <button type="submit">Suchen</button>
+        <input type="text" value={city} onChange={handleCityChange} placeholder="Ciudad" />
+        <button type="submit">Buscar</button>
       </form>
       <div className="weather-container">
         {weatherData.map((data, index) => (
           <WeatherCard
             key={index}
-            city={city || 'Aktueller Standort'}
+            city={searchedCity || 'Situación actual'}
             temperature={data.current_weather.temperature}
             condition={data.current_weather.weathercode}
           />
