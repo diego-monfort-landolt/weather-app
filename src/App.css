@@ -27,7 +27,6 @@
   box-shadow: 1px 1px 8px red;
   transition: transform 0.2s;
 }
-
 .weather-card:hover {
   transform: scale(1.05);
 }
