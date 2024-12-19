@@ -85,22 +85,41 @@ button:hover {
 }
 /*card weater*/
 
+.weather-card { 
+  position: relative; 
+  color: #fff; /* Textfarbe auf schwarz setzen */ 
+  padding: 20px; 
+  border-radius: 8px; 
+  overflow: hidden; 
+} 
+.weather-card::before { 
+  content: ''; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background: rgba(0, 0, 0, 0.5); /* Halbtransparente schwarze Überlagerung */ 
+  z-index: 1; 
+} 
+.weather-card h3, .weather-card p { 
+  position: relative;
+  z-index: 2; 
+}
+/* Hier werden die fotos vom weter eingefügt - hintergrund */
 .weather-card.sunny {
   background-image: url('https://cdn.pixabay.com/photo/2016/10/03/19/40/sunset-1712625_640.jpg');
   background-size: cover;
-  color: black;
 }
 
 .weather-card.rainy {
   background-image: url('https://cdn.pixabay.com/photo/2018/03/11/12/14/raindrops-3216607_1280.jpg');
-  background-size: cover;
-  
+  background-size: cover; 
 }
 
 .weather-card.cloudy {
   background-image: url('https://cdn.pixabay.com/photo/2016/09/05/07/44/cloudy-1645868_1280.jpg');
-  background-size: cover;
-  
+  background-size: cover; 
 }
 
 @media (max-width: 768px) {
