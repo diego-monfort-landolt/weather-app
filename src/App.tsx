@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import WeatherCard from './WeatherCard';
 import './App.css';
 
 const App: React.FC = () => {
-  interface WeatherData {
-    current_weather: {
-      temperature: number;
-      weathercode: number;
-    };
-  }
-
-  const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
+  const [city, setCity] = useState('');
+  const [weatherData, setWeatherData] = useState<any>(null);
+  const [searchedCity, setSearchedCity] = useState('');
   const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
-  const [city, setCity] = useState<string>('');
-  const [searchedCity, setSearchedCity] = useState<string>(''); // Neuer Zustand für die gesuchte Stadt
 
   useEffect(() => {
     if (location) {
@@ -24,17 +16,22 @@ const App: React.FC = () => {
   const fetchWeatherData = async (latitude: number, longitude: number) => {
     const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
     const data = await response.json();
-    setWeatherData([data]);
+    setWeatherData(data);
+  };
+
+  const fetchLocationName = async (latitude: number, longitude: number) => {
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+    const data = await response.json();
+    return data.address.city || data.address.town || data.address.village || 'Unknown location';
   };
 
   const handleLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-        setSearchedCity(''); // Gesuchte Stadt zurücksetzen
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const { latitude, longitude } = position.coords;
+        setLocation({ latitude, longitude });
+        const locationName = await fetchLocationName(latitude, longitude);
+        setSearchedCity(locationName); // Standortname setzen
       });
     } else {
       alert('Geolocation is not supported by this browser.');
@@ -58,33 +55,38 @@ const App: React.FC = () => {
     }
   };
 
+  const getWeatherClass = (weatherCode: number) => {
+    if (weatherCode >= 0 && weatherCode < 3) return 'sunny';
+    if (weatherCode >= 3 && weatherCode < 6) return 'cloudy';
+    if (weatherCode >= 6 && weatherCode < 9) return 'rainy';
+    // Weitere Wetterzustände hinzufügen
+    return '';
+  };
+
   return (
     <div className="App">
       <h1>Previsión meteorológica</h1>
-      <button onClick={handleLocation}>Ubicación</button>
       <form onSubmit={handleCitySubmit}>
-        <input 
-        type="text"
-        value={city} 
-        onChange={handleCityChange} 
-        placeholder="Ciudad" 
+        <input
+          type="text"
+          value={city}
+          onChange={handleCityChange}
+          placeholder="Ingrese ciudad"
         />
-
-        <button type="submit">Buscar</button>
+        <button type="submit">Obtener el clima</button>
       </form>
-      <div className="weather-container">
-        {weatherData.map((data, index) => (
-            <WeatherCard
-            key={index}
-            city={searchedCity || 'Situación actual'}
-            temperature={data.current_weather.temperature}
-            condition={data.current_weather.weathercode}
-          />
-         
-          
-        ))}
-      </div>
+      <button onClick={handleLocation}>Usar ubicación actual</button>
+      {weatherData && (
+        <div className="weather-container">
+          <div className={`weather-card ${getWeatherClass(weatherData.current_weather.weathercode)}`}>
+            <h3>Clima en {searchedCity}</h3>
+            <p>Temperatura: {weatherData.current_weather.temperature}°C</p>
+            <p>Velocidad del viento: {weatherData.current_weather.windspeed} km/h</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
 export default App;

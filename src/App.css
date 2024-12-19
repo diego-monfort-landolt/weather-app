@@ -83,7 +83,25 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+/*card weater*/
 
+.weather-card.sunny {
+  background-image: url('https://cdn.pixabay.com/photo/2016/10/03/19/40/sunset-1712625_640.jpg');
+  background-size: cover;
+  color: black;
+}
+
+.weather-card.rainy {
+  background-image: url('https://cdn.pixabay.com/photo/2018/03/11/12/14/raindrops-3216607_1280.jpg');
+  background-size: cover;
+  
+}
+
+.weather-card.cloudy {
+  background-image: url('https://cdn.pixabay.com/photo/2016/09/05/07/44/cloudy-1645868_1280.jpg');
+  background-size: cover;
+  
+}
 
 @media (max-width: 768px) {
   .weather-card {
