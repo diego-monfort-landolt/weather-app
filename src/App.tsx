@@ -63,7 +63,13 @@ const App: React.FC = () => {
       <h1>Previsión meteorológica</h1>
       <button onClick={handleLocation}>Ubicación</button>
       <form onSubmit={handleCitySubmit}>
-        <input type="text" value={city} onChange={handleCityChange} placeholder="Ciudad" />
+        <input 
+        type="text"
+        value={city} 
+        onChange={handleCityChange} 
+        placeholder="Ciudad" 
+        />
+
         <button type="submit">Buscar</button>
       </form>
       <div className="weather-container">
@@ -79,5 +85,4 @@ const App: React.FC = () => {
     </div>
   );
 };
-
 export default App;
