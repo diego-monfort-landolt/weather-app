@@ -40,10 +40,15 @@ const App: React.FC = () => {
 
   const handleCitySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true`);
-    const data = await response.json();
-    setWeatherData([data]);
-    setSearchedCity(city); // Gesuchte Stadt speichern
+    const geocodeResponse = await fetch(`https://nominatim.openstreetmap.org/search?city=${city}&format=json&limit=1`);
+    const geocodeData = await geocodeResponse.json();
+    if (geocodeData.length > 0) {
+      const { lat, lon } = geocodeData[0];
+      fetchWeatherData(parseFloat(lat), parseFloat(lon));
+      setSearchedCity(city);
+    } else {
+      alert('City not found');
+    }
   };
 
   return (
