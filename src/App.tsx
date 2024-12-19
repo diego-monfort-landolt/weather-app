@@ -3,7 +3,14 @@ import WeatherCard from './WeatherCard';
 import './App.css';
 
 const App: React.FC = () => {
-  const [weatherData, setWeatherData] = useState<any[]>([]);
+  interface WeatherData {
+    current_weather: {
+      temperature: number;
+      weathercode: number;
+    };
+  }
+
+  const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [city, setCity] = useState<string>('');
   const [searchedCity, setSearchedCity] = useState<string>(''); // Neuer Zustand für die gesuchte Stadt

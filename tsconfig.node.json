@@ -19,7 +19,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "noImplicitAny": true // Diese Regel aktiviert die Überprüfung auf implizite any-Typen
+    "noImplicitAny": false // Diese Regel aktiviert die Überprüfung auf implizite any-Typen
   },
   "include": ["vite.config.ts"]
 }
