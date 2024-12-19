@@ -38,7 +38,6 @@
   transition: transform 0.2s;
   background-color: rgba(0, 0, 0, 0.5); /* Hintergrundfarbe für bessere Lesbarkeit */
 }
-
 .weather-card:hover {
   transform: scale(1.05);
 }
@@ -84,6 +83,7 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
 
 @media (max-width: 768px) {
   .weather-card {

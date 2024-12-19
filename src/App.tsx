@@ -74,12 +74,14 @@ const App: React.FC = () => {
       </form>
       <div className="weather-container">
         {weatherData.map((data, index) => (
-          <WeatherCard
+            <WeatherCard
             key={index}
             city={searchedCity || 'Situación actual'}
             temperature={data.current_weather.temperature}
             condition={data.current_weather.weathercode}
           />
+         
+          
         ))}
       </div>
     </div>
