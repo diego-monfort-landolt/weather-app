@@ -121,6 +121,19 @@ button:hover {
   background-image: url('https://cdn.pixabay.com/photo/2016/09/05/07/44/cloudy-1645868_1280.jpg');
   background-size: cover; 
 }
+.weather-card.foggy {
+  background-image: url('https://cdn.pixabay.com/video/2018/05/11/16160-269534741_tiny.mp4');
+  background-size: cover; 
+}
+.weather-card.showerrain {
+  background-image: url('https://pixabay.com/es/photos/niebla-neblinoso-bosque-%C3%A1rboles-7547298/');
+  background-size: cover; 
+}
+
+.weather-card.snow {
+  background-image: url('https://pixabay.com/es/illustrations/copos-de-nieve-nieve-nevada-nevando-554635/');
+  background-size: cover; 
+}
 
 @media (max-width: 768px) {
   .weather-card {

@@ -59,9 +59,13 @@ const App: React.FC = () => {
     if (weatherCode >= 0 && weatherCode < 3) return 'sunny';
     if (weatherCode >= 3 && weatherCode < 6) return 'cloudy';
     if (weatherCode >= 6 && weatherCode < 9) return 'rainy';
+    if (weatherCode >= 9 && weatherCode < 12) return 'foggy';
+    if (weatherCode >= 12 && weatherCode < 15) return 'showerrain';
+    if (weatherCode >= 12 && weatherCode < 15) return 'snow';
     // Weitere Wetterzustände hinzufügen
     return '';
   };
+  
 
   return (
     <div className="App">
