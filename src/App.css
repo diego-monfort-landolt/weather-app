@@ -83,11 +83,11 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-/*card weater*/
+/*card weather*/
 
 .weather-card { 
   position: relative; 
-  color: #fff; /* Textfarbe auf schwarz setzen */ 
+  color: #fff;
   padding: 20px; 
   border-radius: 8px; 
   overflow: hidden; 
@@ -144,7 +144,6 @@ button:hover {
     width: 90%;
   }
 }
-
 @media (max-width: 480px) {
   .weather-card {
     width: 100%;
